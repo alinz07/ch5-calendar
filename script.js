@@ -5,9 +5,11 @@ var taskArray = [];
 $("#currentDay").text(moment().format("dddd, MMMM Do"));
 
 //create function to load tasks saved in local storage. Off the top of me head I think
-//it will involved iterating and parsing through an array, then appending to the 
+//it will involve iterating and parsing through an array, then appending to the 
 //element with the i id.
-var loadTasks
+var loadTasks = function() {
+    taskArray = JSON.parse(localStorage.getItem("tasks"));
+}
 
 //div contents to local storage. empty local storage each day
 //save contents to array object
@@ -17,13 +19,16 @@ var saveTasks = function() {
         className = ".hour-" + (9+i);
         taskSection = "section" + className;
         taskDiv = $(taskSection).find(".task");
-        taskDiv.attr("taskId", i);
-        console.log(taskDiv.attr("taskId"));
+        taskDiv.text("hello");
         taskText = $(taskDiv).text();
-        taskArray.push(taskText);
+        const hourObj = {
+            taskId: i+9,
+            text: taskText,
+        }
+        taskArray.push(hourObj);
     }
 
-    localStorage.setItem("tasks", taskArray);
+    localStorage.setItem("tasks", JSON.stringify(taskArray));
 }
 
 //at the beginning of every day (midnight), change class to future color (green) 
@@ -35,5 +40,3 @@ var changeDay = function(event) {
 //as each hour passes, update the color of the time blocks
 
 //create event listener hopefully with moment, so when the day changes, changeDay executes
-
-saveTasks();
