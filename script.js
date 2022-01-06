@@ -4,26 +4,35 @@ var taskArray = [];
 //use moment.js to display day in header p tag with class lead, id currentDay
 $("#currentDay").text(moment().format("dddd, MMMM Do"));
 
-//function to dynamically edit .task divs anytime you click on the form
-var editTask = function(event) {
-        
-    //target the div
-    //var thisInput=$(event.target);
- 
-    
-}
-
 //create function to load tasks saved in local storage. Off the top of me head I think
 //it will involve iterating and parsing through an array, then appending to the 
 //element with the i id.
 var loadTasks = function() {
+
     taskArray = JSON.parse(localStorage.getItem("tasks"));
-    console.log(taskArray);
+    
+    //if nothing in local storage, end function, nothing to load
+    if (!taskArray) {
+        return;
+    }
+    else {
+        //update each input el with the taskArray info from local storage
+        for (var i = 0; i<9; i++) {
+            var className = ".hour-" + (9+i);
+            var taskSection = "section" + className;
+            var inputEl = $(taskSection).find(".task-input");
+            var inputText = taskArray[i].text;
+            inputEl.val(inputText);
+        }
+    }
+
 }
 
 //div contents to local storage. empty local storage each day
 //save contents to array object
-var saveTasks = function() {
+var saveTasks = function(event) {
+
+    taskArray=[];
 
     for (var i = 0; i<9; i++) {
         var className = ".hour-" + (9+i);
@@ -50,6 +59,6 @@ var changeDay = function(event) {
 //create event listener hopefully with moment, so when the day changes, changeDay executes
 
 //create event listener to edit .task div when you click on the .task-form form
-$(".task-input").on("click", editTask);
+$(".saveBtn").on("click", saveTasks);
 
-saveTasks();
+loadTasks();
