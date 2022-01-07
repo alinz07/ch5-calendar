@@ -77,51 +77,61 @@ var setTimeCheck = function() {
     var now = moment().minute();
 
     //get difference in minutes of now vs 00 minutes
-    var timeDiff = now - zeroMinute;
+    var minuteDiff = now - zeroMinute;
+    var milliDiff = minuteDiff * 60000;
 
     //set a timer to run the hourCheck function in the difference of minutes
-
+    var myInterval = setInterval(myTimer, 3600000 - milliDiff);
+    
+    var myTimer = function() {
+        hourCheck();
+        clearInterval(myInterval);
+    }
 }
 
+//if browser is left open, the colors will update hourly
 var hourCheck = function(firstRun) {
 
     //check if the hour is midnight
+    var hourNum = moment().hour();
+    console.log(hourNum);
 
-    //if it is, run changeDay function
+    if (hourNum==0) {
+        changeDay();
+    }
+    else {
+        assignTimeColors(hourNum);
+    };
 
-    // else {
-    //     assignTimeColors();
-    // }
-
-    //run again every 60 minutes
+    setInterval(assignTimeColors, 3600000);
 }
 
-var assignTimeColors = function () {
+var assignTimeColors = function (hourNum) {
 
     for (var i = 0; i<9; i++) {
         var className = ".hour-" + (9+i);
         var taskSection = "section" + className;
         var inputEl = $(taskSection).find(".task-input");
 
-        //if (moment().hr == className -.hour) {
-            //then assign present class
-        //}
-        // else if () {
-
-        // }
-        // else () {
-
-        // }
-        
-        inputEl.addClass("future");
+        if (hourNum > (9+i)) {
+            inputEl.removeClass("past present future");
+            inputEl.addClass("past");
+        }
+        else if (hourNum == (9+i)) {
+            inputEl.removeClass("past present future");
+            inputEl.addClass("present");
+        }
+        else if (hourNum < (9+i)) {
+            inputEl.removeClass("past present future");
+            inputEl.addClass("future");
+        }
     }
-}
-
-
+};
 
 //create event listener to edit .task div when you click on the .task-form form
 $(".saveBtn").on("click", saveTasks);
 
 loadTasks();
 
-//assignTimeColors();
+var rightNour=moment().hour();
+assignTimeColors(rightNour);
