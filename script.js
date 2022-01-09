@@ -136,3 +136,5 @@ loadTasks();
 
 var rightNour=moment().hour();
 assignTimeColors(rightNour);
+
+setTimeCheck();
