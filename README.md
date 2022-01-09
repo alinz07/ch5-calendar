@@ -1,7 +1,7 @@
-# ch4-coding-quiz
+# ch5-Workday-Planner
 <br/>
 
-## **Link** to web application: https://alinz07.github.io/ch5-calendar/  
+## **Link** to web application: https://alinz07.github.io/ch5-calendar/ 
 
 ## **Link** to project repository: https://github.com/alinz07/ch5-calendar  
 <br/>
