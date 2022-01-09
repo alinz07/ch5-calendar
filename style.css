@@ -63,10 +63,17 @@ textarea{
   border-bottom-right-radius: 15px;
   background-color: #06AED5;
   color: white;
+  position: relative;
+}
+
+.saveBtn i {
+  position: absolute;
+  left: 40px;
 }
 
 .saveBtn i:hover {
   font-size: 20px;
+  color: darkblue;
   transition: all .3s ease-in-out;
 }
 
@@ -82,4 +89,5 @@ textarea{
   position: absolute;
   top: 0;
   left: 0;
+  color: black;
 }
