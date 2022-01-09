@@ -90,7 +90,7 @@ var setTimeCheck = function() {
 }
 
 //if browser is left open, the colors will update hourly
-var hourCheck = function(firstRun) {
+var hourCheck = function() {
 
     //check if the hour is midnight
     var hourNum = moment().hour();
@@ -100,6 +100,7 @@ var hourCheck = function(firstRun) {
         changeDay();
     }
     else {
+        console.log("not midnight");
         assignTimeColors(hourNum);
     };
 
