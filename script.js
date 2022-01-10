@@ -109,6 +109,8 @@ var hourCheck = function() {
 
 var assignTimeColors = function (hourNum) {
 
+    var hourNum = moment().hour();
+
     for (var i = 0; i<9; i++) {
         var className = ".hour-" + (9+i);
         var taskSection = "section" + className;
