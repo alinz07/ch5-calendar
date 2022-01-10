@@ -82,12 +82,8 @@ var setTimeCheck = function() {
     var minToHour = 3600000 - milliDiff;
     console.log(minToHour);
 
-    //set a timer to run the hourCheck function in the difference of minutes
-    var myInterval = setInterval(myTimer, minToHour);
-    
-    var myTimer = function() {
-        hourCheck();
-    }
+    //set a delay to run the hourCheck function in the difference of minutes
+    setTimeout(hourCheck, minToHour);
 }
 
 //if browser is left open, the colors will update hourly
@@ -95,9 +91,6 @@ var hourCheck = function() {
 
     //need to check that this function is called as intended
     console.log("running");
-
-    //clear the previous interval because we want it to run on the hour
-    clearInterval(myInterval);
 
     //check if the hour is midnight
     var hourNum = moment().hour();

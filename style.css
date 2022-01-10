@@ -34,6 +34,7 @@ textarea{
   white-space: pre-wrap;
   height: 80px;
   border-top: 1px solid white;;
+  margin-right: 50px;
 }
 
 .hour {
@@ -90,4 +91,17 @@ textarea{
   top: 0;
   left: 0;
   color: black;
+}
+
+/* media queries */
+@media screen and (max-width: 991px) {
+
+  .row {
+    height: fit-content;
+  }
+  
+  .row > * {
+    height: 33.33%;
+  }
+
 }
